@@ -2,7 +2,7 @@ const dotenv= require('dotenv');
 const express = require('express');
 const notes = require("./data/notes");
 const userRoutes = require('./routes/userRoutes');
-
+const adminRoutes = require('./routes/adminRoutes');
 
 const app = express();
 dotenv.config();
@@ -28,6 +28,8 @@ app.get("/api/notes", (req,res)=>{
 }); 
 
  app.use('/api/users',userRoutes);
+ app.use('api/admin',adminRoutes)
+
 
  app.use(notFound);
  app.use(errorHandler);
