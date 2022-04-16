@@ -1,7 +1,8 @@
 const mongoose = require ('mongoose');
+const { MONGO_URL } = require('../../config');
 const connectDB = async () => {
     try{
-          const conn = await mongoose.connect("mongodb+srv://ankitasingh01:sNUWSskp62yhTkG8@cluster0.lwsuq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", err => {
+          const conn = await mongoose.connect(MONGO_URL, err => {
         if(err) throw err;
         console.log('connected to MongoDB')
     });  
