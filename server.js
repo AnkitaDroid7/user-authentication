@@ -9,7 +9,7 @@ app.use(cors())
 
 const connectDB = require('./config/db');
 const { notFound, errorHandler } = require('./middlewares/errorMiddleware');
-const { PORT } = require('../config');
+const { PORT } = require('./config');
 
 connectDB();
 

@@ -1,6 +1,6 @@
 const multer  = require('multer');
 const {GridFsStorage} = require('multer-gridfs-storage');
-const { MONGO_URL } = require('../../config');
+const { MONGO_URL } = require('../config');
 
 const storage = new GridFsStorage({ 
     url: MONGO_URL,

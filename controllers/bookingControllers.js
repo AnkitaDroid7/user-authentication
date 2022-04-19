@@ -6,9 +6,9 @@ const { sendMail } = require('../utils/mail');
 const createBooking = asyncHandler(async (req, res) => {
     const { name, email, phonenumber, servicetype, location, image, ip } = req.body;
 
-    const prevBooking = await Booking.findOne({ ip });
+    const prevBooking = await Booking.findOne({ ip, createdAt: { $gt: new Date(Date.now() - 120000) } });
 
-    if (prevBooking && ((Date.now() - new Date(prevBooking.createdAt)) / 1000 < 120)) {
+    if (prevBooking) {
         res.status(400)
         throw new Error("Please wait for a while");
     }
@@ -24,7 +24,8 @@ const createBooking = asyncHandler(async (req, res) => {
     });
 
     if (booking) {
-        await sendMail(email, name)
+        await sendMail(email, name, "user")
+        await sendMail("admin@xyz.com", name, "admin")
         res.status(201).json({ booking });
     } else {
         res.status(400)
